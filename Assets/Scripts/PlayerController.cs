@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -28,6 +30,7 @@ namespace ShadowChimera
 		private InputActionMap m_playerMap;
 		private InputAction m_moveAction;
 		private InputAction m_lookAction;
+		private InputAction m_fireAction;
 
 
 		private void Awake()
@@ -35,16 +38,27 @@ namespace ShadowChimera
 			m_playerMap = m_inputActionAsset.FindActionMap("Player");
 			m_moveAction = m_playerMap.FindAction("Move");
 			m_lookAction = m_playerMap.FindAction("Look");
+			m_fireAction = m_playerMap.FindAction("Fire");
 		}
 
 		private void OnEnable()
 		{
 			m_playerMap.Enable();
+
+			m_fireAction.performed += OnFireInput;
 		}
+
 
 		private void OnDisable()
 		{
 			m_playerMap.Disable();
+
+			m_fireAction.performed -= OnFireInput;
+		}
+
+		private void OnFireInput(InputAction.CallbackContext context)
+		{
+			Debug.Log("Try fire!");
 		}
 
 		private void Update()
