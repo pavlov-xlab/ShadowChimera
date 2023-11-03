@@ -179,11 +179,11 @@
                 },
                 {
                     "name": "",
-                    "id": "8c8e490b-c610-4785-884f-f04217b23ca4",
+                    "id": "8ab946c5-2c3a-481f-830f-4f615f6d9ab3",
                     "path": "<Pointer>/delta",
                     "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse;Touch",
+                    "processors": "InvertVector2(invertX=false)",
+                    "groups": "Keyboard&Mouse;Touch",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
