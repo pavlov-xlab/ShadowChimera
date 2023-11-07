@@ -1533,7 +1533,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_character: {fileID: 1010628122}
   m_inputActionAsset: {fileID: -944628639613478452, guid: 1eb9786b1712ca941b3f0ac3069114d1, type: 3}
-  m_cameraTarget: {fileID: 2140648784}
   m_cameraTransform: {fileID: 963194228}
   m_speedRotation: 200
   m_topClamp: 70

@@ -1,8 +1,5 @@
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace ShadowChimera
 {
@@ -10,7 +7,6 @@ namespace ShadowChimera
 	{
 		[SerializeField] private Character m_character;
 		[SerializeField] private InputActionAsset m_inputActionAsset;
-		[SerializeField] private Transform m_cameraTarget;
 		[SerializeField] private Transform m_cameraTransform;		
 		[SerializeField] private float m_speedRotation = 200f;
 		[SerializeField] private float m_topClamp = 70f;
