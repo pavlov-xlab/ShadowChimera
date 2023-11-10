@@ -13,14 +13,17 @@ namespace ShadowChimera
 
 		protected override void OnStart()
 		{
-			var pointsContainer = context.gameObject.GetComponent<PointsContainer>();
-			if (pointsContainer == null)
+			if (m_points.Count == 0)
 			{
-				Debug.LogError("PointsContainer not found!");
-				return;
+				var pointsContainer = context.gameObject.GetComponent<PointsContainer>();
+				if (pointsContainer == null)
+				{
+					Debug.LogError("PointsContainer not found!");
+					return;
+				}
+
+				m_points = pointsContainer.GetPoints();
 			}
-			
-			m_points = pointsContainer.GetPoints();
 		}
 
 		protected override void OnStop()

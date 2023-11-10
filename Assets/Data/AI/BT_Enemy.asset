@@ -18,15 +18,18 @@ MonoBehaviour:
   - rid: 4200190926137589867
   - rid: 4200190926137589870
   - rid: 4200190926137589871
-  - rid: 4200190926137589872
   - rid: 4200190926137589873
   - rid: 4200190926137589874
   - rid: 42987845864390657
+  - rid: 42987845864390659
+  - rid: 42987845864390660
+  - rid: 42987845864390661
+  - rid: 42987845864390664
   treeState: 0
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 100, y: 0, z: 0}
-  viewPosition: {x: -40.666668, y: 380, z: 0}
+  viewPosition: {x: -60, y: 254, z: 0}
   viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
@@ -37,12 +40,68 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 6dc4cc74b2f731c428c069928add078e
-        position: {x: 748.22943, y: 181.33337}
+        position: {x: 1049.3334, y: 378.05447}
         blackboard:
           target: {fileID: 0}
           moveToPosition: {x: 0, y: 0, z: 0}
         description: 
         drawGizmos: 0
+    - rid: 42987845864390659
+      type: {class: FindTargetAction, ns: ShadowChimera, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: cc1a021719833ab4686bf9fc8046566e
+        position: {x: 280.66672, y: 310.05447}
+        blackboard:
+          target: {fileID: 0}
+          moveToPosition: {x: 0, y: 0, z: 0}
+        description: 
+        drawGizmos: 0
+        maxDistance: 10
+    - rid: 42987845864390660
+      type: {class: MoveToPosition, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 26e8a88909c278345ac68862501099c7
+        position: {x: 528, y: 310.05447}
+        blackboard:
+          target: {fileID: 0}
+          moveToPosition: {x: 0, y: 0, z: 0}
+        description: 
+        drawGizmos: 0
+        stoppingDistance: 0.1
+    - rid: 42987845864390661
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 44e5345fc7faef848b0165b50f798c4d
+        position: {x: 430.66666, y: 121.33328}
+        blackboard:
+          target: {fileID: 0}
+          moveToPosition: {x: 0, y: 0, z: 0}
+        description: 
+        drawGizmos: 0
+        children:
+        - rid: 42987845864390659
+        - rid: 42987845864390660
+    - rid: 42987845864390664
+      type: {class: InterruptSelector, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 34ee96622b7987644abeae185cb4041e
+        position: {x: 723.3333, y: -81.89778}
+        blackboard:
+          target: {fileID: 0}
+          moveToPosition: {x: 0, y: 0, z: 0}
+        description: 
+        drawGizmos: 0
+        children:
+        - rid: 42987845864390661
+        - rid: 4200190926137589871
     - rid: 4200190926137589867
       type: {class: RootNode, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
@@ -63,23 +122,23 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: dcafe99d707d250419e5d8ff0ada012e
-        position: {x: 723, y: -230.00012}
+        position: {x: 723, y: -231.74901}
         blackboard:
           target: {fileID: 0}
           moveToPosition: {x: 0, y: 0, z: 0}
         description: Repeat forever
         drawGizmos: 0
         child:
-          rid: 4200190926137589871
+          rid: 42987845864390664
         restartOnSuccess: 1
-        restartOnFailure: 0
+        restartOnFailure: 1
     - rid: 4200190926137589871
       type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 5e06deafef5af5b49aa50aaed9884138
-        position: {x: 722.99994, y: -81.93839}
+        position: {x: 1049.3334, y: 121.38781}
         blackboard:
           target: {fileID: 0}
           moveToPosition: {x: 0, y: 0, z: 0}
@@ -89,26 +148,13 @@ MonoBehaviour:
         - rid: 4200190926137589874
         - rid: 42987845864390657
         - rid: 4200190926137589873
-    - rid: 4200190926137589872
-      type: {class: RandomPosition, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 9a1467763237cb145b9cf65e90ce3193
-        position: {x: 1199.0789, y: -102.005615}
-        blackboard:
-          target: {fileID: 0}
-          moveToPosition: {x: 0, y: 0, z: 0}
-        description: Randomly generates a position into the blackboard
-        drawGizmos: 0
-        range: 10
     - rid: 4200190926137589873
       type: {class: MoveToPosition, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 6d43e0274b9a6b647a32a83ae71f5c62
-        position: {x: 971.3105, y: 181.33337}
+        position: {x: 1272.6666, y: 378.05447}
         blackboard:
           target: {fileID: 0}
           moveToPosition: {x: 0, y: 0, z: 0}
@@ -121,7 +167,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: a6398ba3eee6567469a804864807353b
-        position: {x: 547.8648, y: 181.33337}
+        position: {x: 849.3334, y: 378.05447}
         blackboard:
           target: {fileID: 0}
           moveToPosition: {x: 0, y: 0, z: 0}

@@ -234,8 +234,7 @@ GameObject:
   - component: {fileID: 265987191}
   - component: {fileID: 265987194}
   - component: {fileID: 265987193}
-  - component: {fileID: 265987192}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,29 +257,6 @@ Transform:
   - {fileID: 2127419976}
   m_Father: {fileID: 1010628121}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &265987192
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265987190}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &265987193
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -422,7 +398,7 @@ GameObject:
   - component: {fileID: 288744345}
   - component: {fileID: 288744344}
   - component: {fileID: 288744343}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -682,7 +658,7 @@ GameObject:
   - component: {fileID: 547237088}
   - component: {fileID: 547237087}
   - component: {fileID: 547237086}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4157,7 +4133,7 @@ GameObject:
   - component: {fileID: 1010628121}
   - component: {fileID: 1010628120}
   - component: {fileID: 1010628122}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4237,7 +4213,8 @@ GameObject:
   - component: {fileID: 1053195053}
   - component: {fileID: 1053195054}
   - component: {fileID: 1053195055}
-  m_Layer: 0
+  - component: {fileID: 1053195056}
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4312,6 +4289,22 @@ MonoBehaviour:
   - {fileID: 146646113}
   - {fileID: 639311681}
   - {fileID: 769737813}
+--- !u!114 &1053195056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053195050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b9b9249d5653c14da7b006ad82ac813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_radius: 10
+  m_layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1056016853
 GameObject:
   m_ObjectHideFlags: 0
@@ -4562,7 +4555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1194128476}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CameraTarger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6760,8 +6753,7 @@ GameObject:
   - component: {fileID: 2127419976}
   - component: {fileID: 2127419979}
   - component: {fileID: 2127419978}
-  - component: {fileID: 2127419977}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6783,29 +6775,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 265987191}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!136 &2127419977
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2127419975}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2127419978
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6865,7 +6834,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2140648784}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraTarger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
