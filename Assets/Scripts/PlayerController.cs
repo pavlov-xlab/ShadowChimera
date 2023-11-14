@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace ShadowChimera
@@ -22,7 +23,8 @@ namespace ShadowChimera
 		private InputAction m_lookAction;
 		private InputAction m_fireAction;
 
-
+		private bool m_canLook = true;
+			
 		private void Awake()
 		{
 			m_playerMap = m_inputActionAsset.FindActionMap("Player");
@@ -36,6 +38,8 @@ namespace ShadowChimera
 			m_playerMap.Enable();
 
 			m_fireAction.performed += OnFireInput;
+			
+			m_canLook = true;
 		}
 
 
@@ -59,7 +63,18 @@ namespace ShadowChimera
 
 		private void LateUpdate()
 		{
-			Vector2 look = m_lookAction.ReadValue<Vector2>();
+			// Обработка мыши и UI
+			if (EventSystem.current.currentInputModule.input.GetMouseButtonDown(0))
+			{
+				m_canLook = !EventSystem.current.IsPointerOverGameObject();
+			}
+			else if (EventSystem.current.currentInputModule.input.GetMouseButtonUp(0))
+			{
+				m_canLook = true;
+			}
+			
+
+			var look = m_canLook ? m_lookAction.ReadValue<Vector2>() : Vector2.zero;
 			CameraRotation(look);
 		}
 
