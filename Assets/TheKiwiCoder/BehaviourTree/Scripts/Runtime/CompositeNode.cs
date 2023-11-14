@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,10 +16,13 @@ namespace TheKiwiCoder
 		{
 			for (int i = children.Count - 1; i >= 0; i--)
 			{
-				if (children[i] == null)
+				var n = children[i];
+				if (n == null)
 				{
 					children.RemoveAt(i);
+					continue;
 				}
+				n.Validate();
 			}
 		}
 	}

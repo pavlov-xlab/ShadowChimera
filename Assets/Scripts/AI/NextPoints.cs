@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ShadowChimera
 {
-	public class NextPointsAction : ActionNode
+	public class NextPoints : ActionNode
 	{
 		private List<Vector3> m_points = new();
 		private int m_index = 0;

@@ -27,7 +27,17 @@ namespace TheKiwiCoder {
 
 		private void OnValidate()
 		{
-			nodes.ForEach(n => n.Validate());
+            for (int i = nodes.Count - 1; i >= 0; --i)
+            {
+                var n = nodes[i];
+                if (n == null)
+                {
+                    nodes.RemoveAt(i);
+                    continue;
+                }
+                
+                n.Validate();
+            }
 		}
 
 		public BehaviourTree()
