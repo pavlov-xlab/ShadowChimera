@@ -15,7 +15,9 @@ namespace ShadowChimera.AI
 
 		protected override State OnUpdate()
 		{
+			// Сделать плавный поворот к целе
 			var targetPosition = blackboard.target.position;
+			targetPosition.y = context.transform.position.y;
 			context.transform.LookAt(targetPosition, Vector3.up);
 			return State.Running;
 		}

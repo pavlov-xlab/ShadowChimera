@@ -29,7 +29,7 @@ namespace ShadowChimera
 				return State.Failure;
 			}
 			
-			return child?.Update() ?? State.Running;
+			return child?.Update() ?? State.Success;
 		}
 	}
 }
