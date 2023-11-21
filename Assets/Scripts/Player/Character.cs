@@ -8,6 +8,7 @@ namespace ShadowChimera
     {
 		[SerializeField] private CharacterController m_characterController;
 		[SerializeField] private Transform m_cameraTarget;
+		[SerializeField] private AttackManager m_attackManager;
 
 		[SerializeField] private float m_moveSpeed = 5f;
 		[SerializeField] private float m_sprintSpeed = 10f;
@@ -16,6 +17,16 @@ namespace ShadowChimera
 
 		private float m_rotationVelocity;
 		private float m_targetRotation;
+
+		public AttackManager attackManager => m_attackManager;
+
+		private void Awake()
+		{
+			if (m_attackManager == null)
+			{
+				m_attackManager = GetComponent<AttackManager>();
+			}
+		}
 
 		public void Move(Vector2 move, bool isSprint, float cameraY)
 		{

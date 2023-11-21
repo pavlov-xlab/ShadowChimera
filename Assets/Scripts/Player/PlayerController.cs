@@ -37,8 +37,9 @@ namespace ShadowChimera
 		{
 			m_playerMap.Enable();
 
-			m_fireAction.performed += OnFireInput;
-			
+			m_fireAction.started += OnFireInputStarted;
+			m_fireAction.canceled += OnFireInputCanceled;
+
 			m_canLook = true;
 		}
 
@@ -47,12 +48,18 @@ namespace ShadowChimera
 		{
 			m_playerMap.Disable();
 
-			m_fireAction.performed -= OnFireInput;
+			m_fireAction.started -= OnFireInputStarted;
+			m_fireAction.canceled -= OnFireInputCanceled;
 		}
 
-		private void OnFireInput(InputAction.CallbackContext context)
+		private void OnFireInputStarted(InputAction.CallbackContext context)
 		{
-			Debug.Log("Try fire!");
+			m_character.attackManager.StartUse();
+		}
+
+		private void OnFireInputCanceled(InputAction.CallbackContext context)
+		{
+			m_character.attackManager.EndUse();
 		}
 
 		private void Update()
