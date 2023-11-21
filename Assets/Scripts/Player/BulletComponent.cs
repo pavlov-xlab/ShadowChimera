@@ -8,6 +8,7 @@ namespace ShadowChimera
     {
 		[SerializeField] private float m_force = 50f;
 		[SerializeField] private float m_lifeTime = 5f;
+		[SerializeField] private float m_damage = 10f;
 
 		private void Start()
 		{
@@ -19,6 +20,14 @@ namespace ShadowChimera
 
 		private void OnCollisionEnter(Collision collision)
 		{
+			Debug.Log(collision.gameObject);
+
+			var damageable = collision.gameObject.GetComponentInParent<IDamageable>();
+			if (damageable != null)
+			{
+				damageable.TakeDamage(m_damage);
+			}
+
 			Destroy(gameObject);
 		}
 	}

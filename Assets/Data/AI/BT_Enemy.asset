@@ -26,18 +26,18 @@ MonoBehaviour:
   - rid: 3511468829302849537
   - rid: 3511468829302849538
   - rid: 3511468829302849539
-  - rid: 3511468829302849542
   - rid: 3511468829302849546
   - rid: 3511468832111198211
   - rid: 3511468832111198212
   - rid: 3511468832111198213
   - rid: 3511468832111198215
+  - rid: 42988095701254144
   treeState: 0
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 100, y: 0, z: 0}
-  viewPosition: {x: 102, y: 159, z: 0}
-  viewScale: {x: 0.7561437, y: 0.7561437, z: 1}
+  viewPosition: {x: -115.333336, y: -37.333332, z: 0}
+  viewScale: {x: 0.65751624, y: 0.65751624, z: 1}
   references:
     version: 2
     RefIds:
@@ -55,7 +55,7 @@ MonoBehaviour:
         drawGizmos: 0
         children:
         - rid: 3511468829302849539
-        - rid: 3511468829302849542
+        - rid: 42988095701254144
         - rid: 3511468829302849546
     - rid: 42987845864390664
       type: {class: InterruptSelector, ns: TheKiwiCoder, asm: Assembly-CSharp}
@@ -72,6 +72,18 @@ MonoBehaviour:
         children:
         - rid: 3511468832111198211
         - rid: 4200190926137589871
+    - rid: 42988095701254144
+      type: {class: Attack, ns: ShadowChimera, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: bc33ac3aff6eaa943a219b81eba63ac5
+        position: {x: 690, y: 861.3333}
+        blackboard:
+          target: {fileID: 0}
+          moveToPosition: {x: 0, y: 0, z: 0}
+        description: 
+        drawGizmos: 0
     - rid: 3511468829302849536
       type: {class: FindTarget, ns: ShadowChimera, asm: Assembly-CSharp}
       data:
@@ -124,26 +136,13 @@ MonoBehaviour:
         description: 
         drawGizmos: 0
         attackDistance: 5
-    - rid: 3511468829302849542
-      type: {class: Log, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 069b10cc1c7786b40b273d2821d5e8fd
-        position: {x: 694.99994, y: 861.4525}
-        blackboard:
-          target: {fileID: 0}
-          moveToPosition: {x: 0, y: 0, z: 0}
-        description: Try Attack
-        drawGizmos: 0
-        message: AI Try Attack
     - rid: 3511468829302849546
       type: {class: Wait, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: f31ec4bf8ae5d184bb6189346fd50912
-        position: {x: 877.99994, y: 861.4525}
+        position: {x: 879.749, y: 861.3333}
         blackboard:
           target: {fileID: 0}
           moveToPosition: {x: 0, y: 0, z: 0}

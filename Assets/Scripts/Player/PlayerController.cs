@@ -64,6 +64,12 @@ namespace ShadowChimera
 
 		private void Update()
 		{
+			if (m_character == null)
+			{
+				enabled = false;
+				return;
+			}
+
 			Vector2 move = m_moveAction.ReadValue<Vector2>();
 			Move(move, false);
 		}
