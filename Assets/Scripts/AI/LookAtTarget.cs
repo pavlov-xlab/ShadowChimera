@@ -5,8 +5,11 @@ namespace ShadowChimera.AI
 {
 	public class LookAtTarget : ActionNode
 	{
+		private float m_angularSpeed;
+		
 		protected override void OnStart()
 		{
+			m_angularSpeed = context.agent ? context.agent.angularSpeed : 360f;
 		}
 
 		protected override void OnStop()
@@ -15,10 +18,13 @@ namespace ShadowChimera.AI
 
 		protected override State OnUpdate()
 		{
-			// Сделать плавный поворот к целе
 			var targetPosition = blackboard.target.position;
-			targetPosition.y = context.transform.position.y;
-			context.transform.LookAt(targetPosition, Vector3.up);
+			var contextTr = context.transform;
+			var contextPosition = contextTr.position;
+			
+			targetPosition.y = contextPosition.y;
+			var dir = targetPosition - contextPosition;
+			contextTr.rotation = Quaternion.RotateTowards(contextTr.rotation, Quaternion.LookRotation(dir), m_angularSpeed * Time.deltaTime);
 			return State.Running;
 		}
 	}
