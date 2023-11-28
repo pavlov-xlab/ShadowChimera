@@ -11,13 +11,8 @@ namespace ShadowChimera
 
 	public class WeaponAttackItem : MonoBehaviour, IAttackItem
 	{
-		[SerializeField] private BulletComponent m_prefab;
-		[SerializeField] private Transform m_muzzle;
 		[SerializeField] private float m_delay = 0.1f;
 		[SerializeField] private float m_reloadTime = 1f;
-
-		[Space]
-		[Header("CAGE")]
 		[SerializeField] private int m_bulletCount = 90;
 		[SerializeField] private int m_maxCage = 30;
 		[SerializeField] private int m_cage = 0;
@@ -28,6 +23,13 @@ namespace ShadowChimera
 
 		private WeaponState m_state = WeaponState.Idle;
 		private float m_timer = 0f;
+
+		private IShoot m_shoot;
+
+		private void Awake()
+		{
+			m_shoot = GetComponent<IShoot>();
+		}
 
 		private void Start()
 		{
@@ -70,7 +72,8 @@ namespace ShadowChimera
 
 						if (canFire)
 						{
-							Shoot();
+							m_shoot.Shoot();
+							m_cage--;
 						}
 
 						if (!m_autoFire)
@@ -96,12 +99,6 @@ namespace ShadowChimera
 					}
 					break;
 			}
-		}
-
-		private void Shoot()
-		{
-			Instantiate(m_prefab, m_muzzle.position, m_muzzle.rotation);
-			m_cage--;
 		}
 
 		public void Reload()

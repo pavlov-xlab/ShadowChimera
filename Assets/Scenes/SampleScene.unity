@@ -4492,7 +4492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &938110990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4971,7 +4971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1053195052
 Transform:
   m_ObjectHideFlags: 0
@@ -5509,7 +5509,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1163734411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5672,7 +5672,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1210206066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9192,11 +9192,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PistolWeapon
       objectReference: {fileID: 0}
+    - target: {fileID: 8181911320531342453, guid: 1942fd051a869454e8ab126fe5d274d9, type: 3}
+      propertyPath: shootBase
+      value: 
+      objectReference: {fileID: 3042511636454529813}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1942fd051a869454e8ab126fe5d274d9, type: 3}
+--- !u!114 &3042511636454529813 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 752151035542095834, guid: 1942fd051a869454e8ab126fe5d274d9, type: 3}
+  m_PrefabInstance: {fileID: 2401209450388863430}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1cd16f02a6f6a44dae84d32b86588b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

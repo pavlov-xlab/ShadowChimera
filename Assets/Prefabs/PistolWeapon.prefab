@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 852583428878473129}
   - component: {fileID: 8181911320531342453}
+  - component: {fileID: 752151035542095834}
   m_Layer: 0
   m_Name: PistolWeapon
   m_TagString: Untagged
@@ -46,8 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6660944242ff043a83502288ef53f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_prefab: {fileID: 8176974352592387240, guid: efc2faa652dc56f49b82f5595e57fc23, type: 3}
-  m_muzzle: {fileID: 1707063681885421310}
   m_delay: 0.1
   m_reloadTime: 1
   m_bulletCount: 90
@@ -55,6 +54,20 @@ MonoBehaviour:
   m_cage: 0
   m_autoFire: 0
   m_autoReload: 1
+--- !u!114 &752151035542095834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610642536981279799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1cd16f02a6f6a44dae84d32b86588b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_muzzle: {fileID: 1707063681885421310}
+  m_damage: 10
 --- !u!1 &4043316528302617728
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 507736042572744951}
   - component: {fileID: 3042511636759202929}
+  - component: {fileID: 6982186747873512367}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -46,9 +47,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6660944242ff043a83502288ef53f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_delay: 0.1
+  m_reloadTime: 1
+  m_bulletCount: 90
+  m_maxCage: 30
+  m_cage: 0
+  m_autoFire: 1
+  m_autoReload: 1
+--- !u!114 &6982186747873512367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929970698021369542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c2ffd7e3d5c0d479788814d1d0ac0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_prefab: {fileID: 8176974352592387240, guid: efc2faa652dc56f49b82f5595e57fc23, type: 3}
   m_muzzle: {fileID: 2748979369179790016}
-  m_delay: 0.1
 --- !u!1 &8065339674823297801
 GameObject:
   m_ObjectHideFlags: 0
