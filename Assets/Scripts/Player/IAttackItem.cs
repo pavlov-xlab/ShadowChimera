@@ -8,5 +8,9 @@ namespace ShadowChimera
 	{
 		void StartUse();
 		void EndUse();
+		void Reload();
+
+		void Show();
+		void Hide();
 	}
 }

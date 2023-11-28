@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -22,6 +23,8 @@ namespace ShadowChimera
 		private InputAction m_moveAction;
 		private InputAction m_lookAction;
 		private InputAction m_fireAction;
+		private InputAction m_reloadAction;
+		private InputAction m_switchWeaponAction;
 
 		private bool m_canLook = true;
 			
@@ -31,6 +34,8 @@ namespace ShadowChimera
 			m_moveAction = m_playerMap.FindAction("Move");
 			m_lookAction = m_playerMap.FindAction("Look");
 			m_fireAction = m_playerMap.FindAction("Fire");
+			m_reloadAction = m_playerMap.FindAction("Reload");
+			m_switchWeaponAction = m_playerMap.FindAction("SwitchWeapon");
 		}
 
 		private void OnEnable()
@@ -39,10 +44,21 @@ namespace ShadowChimera
 
 			m_fireAction.started += OnFireInputStarted;
 			m_fireAction.canceled += OnFireInputCanceled;
+			m_reloadAction.performed += OnReloadPerformed;
+			m_switchWeaponAction.performed += OnSwitchWeaponPerformed;
 
 			m_canLook = true;
 		}
 
+		private void OnSwitchWeaponPerformed(InputAction.CallbackContext context)
+		{
+			m_character.attackManager.Next();
+		}
+
+		private void OnReloadPerformed(InputAction.CallbackContext context)
+		{
+			m_character.attackManager.Reload();
+		}
 
 		private void OnDisable()
 		{
@@ -50,6 +66,8 @@ namespace ShadowChimera
 
 			m_fireAction.started -= OnFireInputStarted;
 			m_fireAction.canceled -= OnFireInputCanceled;
+			m_reloadAction.performed -= OnReloadPerformed;
+			m_switchWeaponAction.performed -= OnSwitchWeaponPerformed;
 		}
 
 		private void OnFireInputStarted(InputAction.CallbackContext context)

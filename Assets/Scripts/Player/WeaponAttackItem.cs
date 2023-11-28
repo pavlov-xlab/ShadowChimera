@@ -4,42 +4,134 @@ using UnityEngine;
 
 namespace ShadowChimera
 {
+	public enum WeaponState
+	{
+		Idle, Fire, Reload,
+	}
+
 	public class WeaponAttackItem : MonoBehaviour, IAttackItem
 	{
 		[SerializeField] private BulletComponent m_prefab;
 		[SerializeField] private Transform m_muzzle;
 		[SerializeField] private float m_delay = 0.1f;
-		private Coroutine m_fireCoroutine;
+		[SerializeField] private float m_reloadTime = 1f;
 
+		[Space]
+		[Header("CAGE")]
+		[SerializeField] private int m_bulletCount = 90;
+		[SerializeField] private int m_maxCage = 30;
+		[SerializeField] private int m_cage = 0;
+		[SerializeField] private bool m_autoFire = true;
+		[SerializeField] private bool m_autoReload = true;
+
+		public bool canFire => m_cage > 0;
+
+		private WeaponState m_state = WeaponState.Idle;
+		private float m_timer = 0f;
+
+		private void Start()
+		{
+			InternalReload();
+		}
 
 		public void EndUse()
 		{
 			Debug.Log("End Use", this);
 
-			if(m_fireCoroutine != null)
-			{
-				StopCoroutine(m_fireCoroutine);
-				m_fireCoroutine = null;
-			}
+			m_state = WeaponState.Idle;
 		}
 
 		public void StartUse()
 		{
-			Debug.Log("Start Use", this);
+			if (m_state == WeaponState.Fire)
+			{
+				return;
+			}
 
-			m_fireCoroutine = StartCoroutine(StartFire());
+			m_state = WeaponState.Fire;
+			m_timer = m_delay;
+
+			Debug.Log("Start Use", this);
 		}
 
-		private IEnumerator StartFire()
+		private void Update()
 		{
-			var waitForSeconds = new WaitForSeconds(m_delay);
+			m_timer += Time.deltaTime;
 
-			do
+			switch (m_state)
 			{
-				Instantiate(m_prefab, m_muzzle.position, m_muzzle.rotation);
-				yield return waitForSeconds;
+				case WeaponState.Idle:
+					break;
+
+				case WeaponState.Fire:
+					if (m_timer >= m_delay)
+					{
+						m_timer = 0;
+
+						if (canFire)
+						{
+							Shoot();
+						}
+
+						if (!m_autoFire)
+						{
+							m_state = WeaponState.Idle;
+						}
+						else if (m_autoReload && !canFire)
+						{
+							Reload();
+						}
+					}
+					break;
+
+				case WeaponState.Reload:
+					if (m_timer >= m_reloadTime)
+					{
+						InternalReload();
+
+						if (m_autoFire && canFire)
+						{
+							StartUse();
+						}
+					}
+					break;
 			}
-			while(true);
+		}
+
+		private void Shoot()
+		{
+			Instantiate(m_prefab, m_muzzle.position, m_muzzle.rotation);
+			m_cage--;
+		}
+
+		public void Reload()
+		{
+			if (m_state == WeaponState.Reload)
+			{
+				return;
+			}
+
+			m_timer = 0;
+			m_state = WeaponState.Reload;
+		}
+
+		private void InternalReload()
+		{
+			Debug.Log("Reload");
+			m_bulletCount = Mathf.Max(m_bulletCount - m_maxCage, 0);
+			m_cage = Mathf.Min(m_maxCage, m_bulletCount);
+
+			m_state = WeaponState.Idle;
+		}
+
+		public void Show()
+		{
+			gameObject.SetActive(true);
+		}
+
+		public void Hide()
+		{
+			gameObject.SetActive(false);
 		}
 	}
 }

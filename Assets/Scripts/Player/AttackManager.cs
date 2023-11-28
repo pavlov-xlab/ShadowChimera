@@ -9,15 +9,35 @@ namespace ShadowChimera
 		private List<IAttackItem> m_items = new();
 		private int m_currentIndex = -1;
 
+		public IAttackItem currentItem
+		{
+			get
+			{
+				if (m_currentIndex >= 0)
+				{
+					return m_items[m_currentIndex];
+				}
+				return null;
+			}
+		}
+
 		private void Start()
 		{
 			GetComponentsInChildren<IAttackItem>(true, m_items);
 
+			for(int i = 1; i < m_items.Count; i++)
+			{
+				m_items[i].Hide();
+			}
+
 			m_currentIndex = m_items.Count > 0 ? 0 : -1;
+			currentItem?.Show();
 		}
 
 		public void Next()
 		{
+			currentItem?.Hide();
+
 			if (m_items.Count > 0)
 			{
 				m_currentIndex++;
@@ -25,23 +45,25 @@ namespace ShadowChimera
 				{
 					m_currentIndex = 0;
 				}
+
+				currentItem?.Show();
 			}
 		}
 
 		public void StartUse()
 		{
-			if (m_currentIndex >= 0)
-			{
-				m_items[m_currentIndex].StartUse();
-			}
+			currentItem?.StartUse();
 		}
 
 		public void EndUse()
 		{
-			if (m_currentIndex >= 0)
-			{
-				m_items[m_currentIndex].EndUse();
-			}
+			currentItem?.EndUse();
+		}
+
+
+		public void Reload()
+		{
+			currentItem?.Reload();
 		}
 	}
 }
