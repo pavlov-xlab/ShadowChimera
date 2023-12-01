@@ -26,6 +26,17 @@ namespace ShadowChimera
 
 		private IShoot m_shoot;
 
+		public void Initialize(WeaponSO weaponData)
+		{
+			m_delay = weaponData.delay;
+			m_reloadTime = weaponData.reloadTime;
+			m_bulletCount = weaponData.bulletCount;
+			m_maxCage = weaponData.maxCage;
+			m_cage = weaponData.cage;
+			m_autoFire = weaponData.autoFire;
+			m_autoReload = weaponData.autoReload;
+		}
+
 		private void Awake()
 		{
 			m_shoot = GetComponent<IShoot>();
@@ -129,6 +140,11 @@ namespace ShadowChimera
 		public void Hide()
 		{
 			gameObject.SetActive(false);
+		}
+
+		public void DestroySelf()
+		{
+			Destroy(gameObject);
 		}
 	}
 }

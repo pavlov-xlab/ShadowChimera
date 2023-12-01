@@ -14,6 +14,13 @@ namespace ShadowChimera
 		public bool isFullHealth => m_health == m_healthMax;
         public float healthPercent => m_health / m_healthMax;
 
+        public void Initialize(float max, float initHp)
+        {
+			m_healthMax = max;
+            m_health = initHp;
+            onTakeDamage?.Invoke(0);
+		}
+
         public void TakeDamage(float damage)
         {
             damage = Mathf.Min(damage, m_health);

@@ -9,6 +9,7 @@ namespace ShadowChimera
 		[SerializeField] private CharacterController m_characterController;
 		[SerializeField] private Transform m_cameraTarget;
 		[SerializeField] private AttackManager m_attackManager;
+		[SerializeField] private HealthComponent m_healtCompont;
 
 		[SerializeField] private float m_moveSpeed = 5f;
 		[SerializeField] private float m_sprintSpeed = 10f;
@@ -20,11 +21,29 @@ namespace ShadowChimera
 
 		public AttackManager attackManager => m_attackManager;
 
+		public void Initialize(CharacterSO data)
+		{
+			if (attackManager)
+			{
+				attackManager.Initialize(data.weapons);
+			}
+
+			if (m_healtCompont)
+			{
+				m_healtCompont.Initialize(data.healthData.maxHealth, data.healthData.health);
+			}
+		}
+
 		private void Awake()
 		{
 			if (m_attackManager == null)
 			{
 				m_attackManager = GetComponent<AttackManager>();
+			}
+
+			if (m_healtCompont == null)
+			{
+				m_healtCompont = GetComponent<HealthComponent>();
 			}
 		}
 

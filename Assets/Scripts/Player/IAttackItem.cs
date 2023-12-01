@@ -12,5 +12,7 @@ namespace ShadowChimera
 
 		void Show();
 		void Hide();
+
+		void DestroySelf();
 	}
 }

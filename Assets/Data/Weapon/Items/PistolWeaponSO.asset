@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf1372b4642f904f896829402befc7c, type: 3}
+  m_Name: PistolWeaponSO
+  m_EditorClassIdentifier: 
+  m_prefab: {fileID: 8181911320531342453, guid: 1942fd051a869454e8ab126fe5d274d9, type: 3}
+  m_delay: 0.1
+  m_reloadTime: 1
+  m_bulletCount: 90
+  m_maxCage: 30
+  m_cage: 0
+  m_autoFire: 1
+  m_autoReload: 1
