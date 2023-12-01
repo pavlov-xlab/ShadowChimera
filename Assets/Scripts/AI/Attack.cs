@@ -27,7 +27,7 @@ namespace ShadowChimera
 			if (manager != null)
 			{
 				manager.StartUse();
-				manager.EndUse();
+				//manager.EndUse();
 			}
 			return State.Success;
 		}

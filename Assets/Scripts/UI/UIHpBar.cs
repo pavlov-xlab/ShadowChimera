@@ -8,15 +8,12 @@ namespace ShadowChimera
 {
     public class UIHpBar : MonoBehaviour
     {
-        private Transform m_cameraTransform;
-		
-		[SerializeField] private HealthComponent m_healthComponent;
+        [SerializeField] private HealthComponent m_healthComponent;
 		[SerializeField] private Image m_fillImage;
-		[SerializeField] private GameObject m_container;
 
-		private void Start()
+		public void Initialize(HealthComponent healthComponent)
 		{
-			m_cameraTransform = Camera.main.transform;
+			m_healthComponent = healthComponent;
 		}
 
 		private void OnEnable()
@@ -33,17 +30,11 @@ namespace ShadowChimera
 		private void Refresh()
 		{
 			m_fillImage.fillAmount = m_healthComponent.healthPercent;
-			m_container.SetActive(!m_healthComponent.isFullHealth);
 		}
 
 		private void OnDisable()
 		{
 			m_healthComponent.onTakeDamage += OnTakeDamage;
-		}
-
-		private void LateUpdate()
-		{
-			transform.LookAt(m_cameraTransform);
 		}
 	}
 }
