@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa55786a1cf856d408628738ff40e22b, type: 3}
   m_Name: EnemyPistol_SO
   m_EditorClassIdentifier: 
-  speedMove: 5
+  moveData:
+    speed: 4
+    sprintSpeed: 8
   healthData:
     health: 90
     maxHealth: 100

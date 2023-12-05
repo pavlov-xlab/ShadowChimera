@@ -7,8 +7,6 @@ namespace ShadowChimera
 {
     public class PauseState : GameState
     {
-		public GameplayState gameplayState;
-
 		protected override void OnEnable()
 		{
 			base.OnEnable();
@@ -29,8 +27,12 @@ namespace ShadowChimera
 
 		public void Reume()
 		{
-			Exit();
-			gameplayState.Enter();
+			States.instance.Pop();
+		}
+
+		public void GotoMainMenu()
+		{
+			SceneManager.LoadScene("MainMenu");
 		}
 	}
 }

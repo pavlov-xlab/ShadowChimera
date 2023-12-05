@@ -14,6 +14,8 @@ namespace ShadowChimera
 		[SerializeField] private float m_topClamp = 70f;
 		[SerializeField] private float m_bottomClamp = -9f;
 
+		private CharMoveComponent m_charMoveController;
+
 
 		private float m_cameraTargetYaw;
 		private float m_cameraTargetPitch;
@@ -36,6 +38,8 @@ namespace ShadowChimera
 			m_fireAction = m_playerMap.FindAction("Fire");
 			m_reloadAction = m_playerMap.FindAction("Reload");
 			m_switchWeaponAction = m_playerMap.FindAction("SwitchWeapon");
+
+			m_charMoveController = m_character.GetComponent<CharMoveComponent>();
 		}
 
 		private void OnEnable()
@@ -102,8 +106,7 @@ namespace ShadowChimera
 			else if (EventSystem.current.currentInputModule.input.GetMouseButtonUp(0))
 			{
 				m_canLook = true;
-			}
-			
+			}			
 
 			var look = m_canLook ? m_lookAction.ReadValue<Vector2>() : Vector2.zero;
 			CameraRotation(look);
@@ -111,7 +114,7 @@ namespace ShadowChimera
 
 		private void Move(Vector2 move, bool isSprint)
 		{
-			m_character.Move(move, isSprint, m_cameraTransform.eulerAngles.y);
+			m_charMoveController.Move(move, isSprint, m_cameraTransform.eulerAngles.y);
 		}		
 
 		private void CameraRotation(Vector2 look)
@@ -129,7 +132,7 @@ namespace ShadowChimera
 			m_cameraTargetYaw = ClampAngle(m_cameraTargetYaw, float.MinValue, float.MaxValue);
 			m_cameraTargetPitch = ClampAngle(m_cameraTargetPitch, m_bottomClamp, m_topClamp);
 
-			m_character.Look(Quaternion.Euler(m_cameraTargetPitch, m_cameraTargetYaw, 0f));
+			m_charMoveController.Look(Quaternion.Euler(m_cameraTargetPitch, m_cameraTargetYaw, 0f));
 		}
 
 		private static float ClampAngle(float angle, float min, float max)
