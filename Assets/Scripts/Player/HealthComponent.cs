@@ -10,6 +10,7 @@ namespace ShadowChimera
         [SerializeField] private float m_health = 100f;
 
         public event System.Action<float> onTakeDamage;
+		public event System.Action onDie;
 
 		public bool isFullHealth => m_health == m_healthMax;
         public float healthPercent => m_health / m_healthMax;
@@ -31,7 +32,8 @@ namespace ShadowChimera
 
 			if (m_health <= 0)
             {
-                Destroy(gameObject);
+				onDie?.Invoke();
+				//Destroy(gameObject);
             }
         }
     }

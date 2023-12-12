@@ -508,7 +508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &265987191
 Transform:
   m_ObjectHideFlags: 0
@@ -638,7 +638,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.083333336
+  m_VoxelSize: 0.093333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 1
@@ -1310,6 +1310,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 507736042572744951, guid: d7565f69f6f8f4544969bc2bf5e75ff8, type: 3}
   m_PrefabInstance: {fileID: 91951695998862423}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &625266416 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2716506532779675876, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+  m_PrefabInstance: {fileID: 3287607072346659282}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &639311680
 GameObject:
@@ -1991,7 +1996,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 1.3e-44, z: 1.327e-41, w: 0.33332825}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -4768,8 +4773,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6857548, y: 0, z: 0, w: 0.72783273}
-  m_LocalPosition: {x: 0, y: 19, z: 1.83}
+  m_LocalRotation: {x: 0.20978926, y: 0, z: 0, w: 0.97774667}
+  m_LocalPosition: {x: 0, y: 7.84, z: -6.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5088,13 +5093,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.8
+  m_Radius: 0.28
   m_SlopeLimit: 45
   m_StepOffset: 0.25
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!4 &1010628121
 Transform:
   m_ObjectHideFlags: 0
@@ -5108,6 +5113,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 625266416}
   - {fileID: 265987191}
   - {fileID: 2140648784}
   - {fileID: 586828382}
@@ -5344,6 +5350,10 @@ PrefabInstance:
     - target: {fileID: 8019514247677058639, guid: aba3dd869efabdc4fafd81448fe9dd07, type: 3}
       propertyPath: m_Name
       value: EnemyGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 8019514247677058639, guid: aba3dd869efabdc4fafd81448fe9dd07, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -9630,6 +9640,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1942fd051a869454e8ab126fe5d274d9, type: 3}
+--- !u!1001 &3287607072346659282
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1010628121}
+    m_Modifications:
+    - target: {fileID: 2716506532779675876, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716506532779675876, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716506532779675876, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716506532779675876, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716506532779675876, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716506532779675876, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716506532779675876, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716506532779675876, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716506532779675876, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716506532779675876, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3384781538002209374, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+      propertyPath: m_Name
+      value: Armature
+      objectReference: {fileID: 0}
+    - target: {fileID: 8361250890621592959, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -7072505045003558295, guid: e2008e56e8f07c54cacb8870ff1bbaaf, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f26a47c8f46ca394089b529c82abfdef, type: 3}
 --- !u!1001 &6375101830790463700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9701,6 +9772,10 @@ PrefabInstance:
     - target: {fileID: 8019514247677058639, guid: aba3dd869efabdc4fafd81448fe9dd07, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8019514247677058639, guid: aba3dd869efabdc4fafd81448fe9dd07, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

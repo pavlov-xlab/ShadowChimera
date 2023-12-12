@@ -9,6 +9,8 @@ namespace ShadowChimera
 	{
 		[SerializeField] private NavMeshAgent m_agent;
 
+		public Vector3 velocity => m_agent.velocity;
+
 		public void Init(float speed, float sprintSpeed)
 		{
 			m_agent.speed = speed;

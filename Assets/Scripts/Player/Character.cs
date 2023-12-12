@@ -11,6 +11,7 @@ namespace ShadowChimera
 		private IMoveComponent m_moveComponent;
 
 		public AttackManager attackManager => m_attackManager;
+		public HealthComponent healtCompont => m_healtCompont;
 		public IMoveComponent moveComponent => m_moveComponent;
 
 		public void Initialize(CharacterSO data)

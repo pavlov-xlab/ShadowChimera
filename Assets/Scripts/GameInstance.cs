@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace ShadowChimera
 {
@@ -9,6 +10,7 @@ namespace ShadowChimera
         public static GameInstance instance;
 		
 		public Player player { private set; get; } = new Player();
+		[SerializeField] private AudioMixer m_audioMixer;
 
 		private void Awake()
 		{
@@ -29,6 +31,8 @@ namespace ShadowChimera
 		public void ApplySettings()
 		{
 			QualitySettings.SetQualityLevel(player.settings.quality);
+			m_audioMixer.SetFloat("MusicVolume", Mathf.Lerp(-80f, 0f, player.settings.musicVolume / 100f));
+			m_audioMixer.SetFloat("SfxVolume", Mathf.Lerp(-80f, 0f, player.settings.fxVolume / 100f));
 		}
 
 		private void OnApplicationQuit()
