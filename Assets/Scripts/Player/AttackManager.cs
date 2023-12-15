@@ -9,6 +9,8 @@ namespace ShadowChimera
 		private List<IAttackItem> m_items = new();
 		private int m_currentIndex = -1;
 
+		public event System.Action onUse;
+
 		public IAttackItem currentItem
 		{
 			get
@@ -37,6 +39,7 @@ namespace ShadowChimera
 				item.Initialize(weaponData);
 				item.Hide();
 				m_items.Add(item);
+				item.onUse += () => onUse?.Invoke();
 			}
 
 
