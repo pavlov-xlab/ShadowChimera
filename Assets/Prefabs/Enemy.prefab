@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0242a37ad6983434fa5ec7633e0a8e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_data: {fileID: 0}
+  m_data: {fileID: 11400000, guid: 0a22ec7cffff91b4786fffa353dcb6cf, type: 2}
   m_caharacter: {fileID: 5871544805275432409}
 --- !u!114 &3389765948352762838
 MonoBehaviour:
@@ -479,6 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88ee62bd248293438ddf9c20b2d9018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_character: {fileID: 5871544805275432409}
   m_animator: {fileID: 1847302008026612841}
 --- !u!4 &5711342468343471635 stripped
 Transform:
