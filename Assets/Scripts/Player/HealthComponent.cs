@@ -9,6 +9,8 @@ namespace ShadowChimera
 		[SerializeField] private float m_healthMax = 100f;
         [SerializeField] private float m_health = 100f;
 
+        public bool isDie => m_health <= 0f;
+
         public event System.Action<float> onTakeDamage;
 		public event System.Action onDie;
 
