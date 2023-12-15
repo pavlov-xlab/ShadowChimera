@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace ShadowChimera
 {
     public class CharAnimsComponent : MonoBehaviour
     {
-		private IMoveComponent m_moveComponent;
+		[SerializeField] private Character m_character;
 		[SerializeField] private Animator m_animator;
 
 		private void Awake()
@@ -16,9 +17,14 @@ namespace ShadowChimera
 				m_animator = GetComponent<Animator>();
 			}
 
-			Character character = GetComponentInParent<Character>();
-			m_moveComponent = character.moveComponent;
-			character.healtCompont.onDie += () =>
+			if (m_character == null)
+			{
+				m_character = GetComponent<Character>();
+			}
+
+			m_character = GetComponentInParent<Character>();
+
+			m_character.healtCompont.onDie += () =>
 			{
 				m_animator.SetTrigger("Die");
 			};
@@ -26,11 +32,8 @@ namespace ShadowChimera
 
 		private void Update()
 		{
-			if (m_moveComponent != null)
-			{
-				var speed = m_moveComponent.velocity.magnitude;
-				m_animator.SetFloat("Speed", speed);
-			}
+			var speed = m_character.moveComponent.velocity.magnitude;
+			m_animator.SetFloat("Speed", speed);
 		}
 
 		
