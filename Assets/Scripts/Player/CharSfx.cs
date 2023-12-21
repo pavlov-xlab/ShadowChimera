@@ -8,6 +8,7 @@ namespace ShadowChimera
     {
 		[SerializeField] private AudioSource m_audioSource;
 		[SerializeField] private List<AudioClip> m_stepAudioClips;
+		[SerializeField] private AudioClip m_landAudioClips;
 
 		public void OnFootstep()
 		{
@@ -16,6 +17,11 @@ namespace ShadowChimera
 				var index = Random.Range(0, m_stepAudioClips.Count);
 				m_audioSource.PlayOneShot(m_stepAudioClips[index]);
 			}
+		}
+
+		public void OnLand()
+		{
+			m_audioSource.PlayOneShot(m_landAudioClips);
 		}
 	}
 }

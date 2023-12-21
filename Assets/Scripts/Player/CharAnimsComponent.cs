@@ -13,8 +13,13 @@ namespace ShadowChimera
 		private static int SpeedId = Animator.StringToHash("Speed");
 		private static int DieId = Animator.StringToHash("Die");
 		private static int ShootId = Animator.StringToHash("Shoot");
+		private static int JumpId = Animator.StringToHash("Jump");
+		private static int GroundedId = Animator.StringToHash("Grounded");
+		private static int FreeFallId = Animator.StringToHash("FreeFall");
 
-		private void Awake()
+		private IMoveComponent moveComponent => m_character.moveComponent;
+
+		private void Start()
 		{
 			if (m_animator == null)
 			{
@@ -37,14 +42,30 @@ namespace ShadowChimera
 			{
 				m_animator.SetTrigger(ShootId);
 			};
+
+			moveComponent.onJump += () =>
+			{
+				m_animator.SetBool(GroundedId, false);
+				m_animator.SetBool(JumpId, true);
+			};
 		}
 
-		private void Update()
+		private void LateUpdate()
 		{
-			var speed = m_character.moveComponent.velocity.magnitude;
+			var speed = moveComponent.velocity.magnitude;
 			m_animator.SetFloat(SpeedId, speed);
-		}
 
-		
+			if (moveComponent.isGrounded)
+			{
+				m_animator.SetBool(GroundedId, true);
+				m_animator.SetBool(FreeFallId, false);
+				m_animator.SetBool(JumpId, false);
+			}
+			else
+			{
+				m_animator.SetBool(GroundedId, false);
+				m_animator.SetBool(FreeFallId, true);
+			}
+		}
 	}
 }

@@ -61,6 +61,7 @@ namespace ShadowChimera
 
 		private void OnJumpPerformed(InputAction.CallbackContext obj)
 		{
+			m_charMoveController.Jump();
 		}
 
 		private void OnSwitchWeaponPerformed(InputAction.CallbackContext context)
