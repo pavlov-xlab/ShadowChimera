@@ -9,7 +9,7 @@ namespace ShadowChimera
 	{
 		[SerializeField] private Character m_character;
 		[SerializeField] private InputActionAsset m_inputActionAsset;
-		[SerializeField] private Transform m_cameraTransform;		
+		[SerializeField] private Transform m_cameraTransform;
 		[SerializeField] private float m_speedRotation = 200f;
 		[SerializeField] private float m_topClamp = 70f;
 		[SerializeField] private float m_bottomClamp = -9f;
@@ -27,9 +27,11 @@ namespace ShadowChimera
 		private InputAction m_fireAction;
 		private InputAction m_reloadAction;
 		private InputAction m_switchWeaponAction;
+		private InputAction m_jumpAction;
+		private InputAction m_sprintAction;
 
 		private bool m_canLook = true;
-			
+
 		private void Awake()
 		{
 			m_playerMap = m_inputActionAsset.FindActionMap("Player");
@@ -38,6 +40,8 @@ namespace ShadowChimera
 			m_fireAction = m_playerMap.FindAction("Fire");
 			m_reloadAction = m_playerMap.FindAction("Reload");
 			m_switchWeaponAction = m_playerMap.FindAction("SwitchWeapon");
+			m_jumpAction = m_playerMap.FindAction("Jump");
+			m_sprintAction = m_playerMap.FindAction("Sprint");
 
 			m_charMoveController = m_character.GetComponent<CharMoveComponent>();
 		}
@@ -50,8 +54,14 @@ namespace ShadowChimera
 			m_fireAction.canceled += OnFireInputCanceled;
 			m_reloadAction.performed += OnReloadPerformed;
 			m_switchWeaponAction.performed += OnSwitchWeaponPerformed;
+			m_jumpAction.performed += OnJumpPerformed;
 
 			m_canLook = true;
+		}
+
+		private void OnJumpPerformed(InputAction.CallbackContext obj)
+		{
+			m_charMoveController.Jump();
 		}
 
 		private void OnSwitchWeaponPerformed(InputAction.CallbackContext context)
@@ -93,7 +103,7 @@ namespace ShadowChimera
 			}
 
 			Vector2 move = m_moveAction.ReadValue<Vector2>();
-			Move(move, false);
+			Move(move, m_sprintAction.IsPressed());
 		}
 
 		private void LateUpdate()
@@ -106,7 +116,7 @@ namespace ShadowChimera
 			else if (EventSystem.current.currentInputModule.input.GetMouseButtonUp(0))
 			{
 				m_canLook = true;
-			}			
+			}
 
 			var look = m_canLook ? m_lookAction.ReadValue<Vector2>() : Vector2.zero;
 			CameraRotation(look);
@@ -115,12 +125,12 @@ namespace ShadowChimera
 		private void Move(Vector2 move, bool isSprint)
 		{
 			m_charMoveController.Move(move, isSprint, m_cameraTransform.eulerAngles.y);
-		}		
+		}
 
 		private void CameraRotation(Vector2 look)
 		{
 			const float threshold = 0.01f;
-			
+
 			if (look.sqrMagnitude >= threshold)
 			{
 				float deltaTimeMultiplier = m_speedRotation * Time.deltaTime;

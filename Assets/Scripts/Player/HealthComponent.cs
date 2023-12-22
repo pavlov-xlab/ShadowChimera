@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ShadowChimera
 {
@@ -8,9 +9,13 @@ namespace ShadowChimera
 	{
 		[SerializeField] private float m_healthMax = 100f;
         [SerializeField] private float m_health = 100f;
+        [SerializeField] private UnityEvent m_onDie;
+
+        public bool isDie => m_health <= 0f;
 
         public event System.Action<float> onTakeDamage;
 		public event System.Action onDie;
+
 
 		public bool isFullHealth => m_health == m_healthMax;
         public float healthPercent => m_health / m_healthMax;
@@ -33,8 +38,9 @@ namespace ShadowChimera
 			if (m_health <= 0)
             {
 				onDie?.Invoke();
+				m_onDie.Invoke();
 				//Destroy(gameObject);
-            }
+			}
         }
     }
 }

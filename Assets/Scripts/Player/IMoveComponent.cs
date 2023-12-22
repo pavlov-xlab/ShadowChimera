@@ -9,5 +9,9 @@ namespace ShadowChimera
         void Init(float speed, float sprintSpeed);
 
         Vector3 velocity { get; }
-	}
+        
+        bool isGrounded { get; }
+
+        event System.Action onJump;
+    }
 }

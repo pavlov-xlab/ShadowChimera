@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88ee62bd248293438ddf9c20b2d9018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_character: {fileID: 0}
   m_animator: {fileID: 8309938011771079326}
 --- !u!82 &8361250890621592959
 AudioSource:
@@ -117,7 +118,7 @@ AudioSource:
   m_GameObject: {fileID: 3384781538002209374}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7072505045003558295, guid: e2008e56e8f07c54cacb8870ff1bbaaf, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -228,6 +229,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 67c8b33e424ccdc4486edf538ab91c5a, type: 3}
   - {fileID: 8300000, guid: 274649b0e221539409070ebf6c18918b, type: 3}
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
+  m_landAudioClips: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
 --- !u!95 &8309938011771079326 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}

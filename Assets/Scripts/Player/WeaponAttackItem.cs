@@ -19,6 +19,8 @@ namespace ShadowChimera
 		[SerializeField] private bool m_autoFire = true;
 		[SerializeField] private bool m_autoReload = true;
 
+		public event System.Action onUse;
+
 		public bool canFire => m_cage > 0;
 
 		private WeaponState m_state = WeaponState.Idle;
@@ -84,6 +86,7 @@ namespace ShadowChimera
 						if (canFire)
 						{
 							m_shoot.Shoot();
+							onUse?.Invoke();
 							m_cage--;
 						}
 
