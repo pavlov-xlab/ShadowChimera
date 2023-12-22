@@ -1,24 +1,77 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace ShadowChimera
 {
     public class CarController : MonoBehaviour
     {
-        public WheelCollider frontLeftWheel;
-        public WheelCollider frontRightWheel;
-        public WheelCollider rearLeftWheel;
-        public WheelCollider rearRightWheel;
+        [Serializable] 
+        public class Wheel
+        {
+            [SerializeField] private Transform wheelTransform;
+            [SerializeField] private WheelCollider wheelCollider;
+            private Quaternion m_steerlessLocalRotation;
+            
+            public float motorTorque
+            {
+                set => wheelCollider.motorTorque = value;
+                get => wheelCollider.motorTorque;
+            }
+            
+            public float brakeTorque
+            {
+                set => wheelCollider.brakeTorque = value;
+                get => wheelCollider.brakeTorque;
+            }
+            
+            public float steerAngle
+            {
+                set => wheelCollider.steerAngle = value;
+                get => wheelCollider.steerAngle;
+            }
+            
+            public void UpdateWheelFromCollider()
+            {
+                wheelCollider.GetWorldPose(out Vector3 position, out Quaternion rotation);
+                wheelTransform.position = position;
+                wheelTransform.rotation = rotation;
+            }
+            
+            public void Setup() => m_steerlessLocalRotation = wheelTransform.localRotation;
+            public void StoreDefaultRotation() => m_steerlessLocalRotation = wheelTransform.localRotation;
+            public void SetToDefaultRotation() => wheelTransform.localRotation = m_steerlessLocalRotation;
+        }
+        
+        
+        public Wheel frontLeftWheel;
+        public Wheel frontRightWheel;
+        public Wheel rearLeftWheel;
+        public Wheel rearRightWheel;
 
         public float accelerationStats = 1000f;
         public float brakingStats = 1000f;
+        public float steeringAnimationDamping = 10f;
+        public float maxSteeringAngle = 30f;
         
+        private float m_smoothedSteeringInput = 0f;
         private float m_currentAcceleration = 0.0f;
         private float m_currentBreakForce = 0.0f;
         private int m_gear = 0;
         private float m_lastBrakeValue = 0f;
         private Rigidbody m_rigidbody;
+
+        private void Awake()
+        {
+            m_rigidbody = GetComponent<Rigidbody>();
+            
+            frontLeftWheel.Setup();
+            frontRightWheel.Setup();
+            rearLeftWheel.Setup();
+            rearRightWheel.Setup();
+        }
 
         private void Move()
         {
@@ -38,10 +91,10 @@ namespace ShadowChimera
         
         private void InputControl()
         {
-            // var accel = Input.Accelerate ? 1f : 0f;
-            // var brake = Input.Brake ? 1f : 0f;
-            var accel = 0f;
-            var brake = 0f;
+            var accel = Keyboard.current.upArrowKey.isPressed ? 1f : 0f;
+            var brake = Keyboard.current.downArrowKey.isPressed ? 1f : 0f;
+            // var accel = 0f;
+            // var brake = 0f;
             CheckAutoReverse(ref accel, ref brake, ref m_gear);
             
             m_currentAcceleration = m_gear == -1 ?  -accel : accel;
@@ -76,6 +129,34 @@ namespace ShadowChimera
                 return;
             }
             (acceleration, brake) = (brake, acceleration);
+        }
+
+        private void Update()
+        {
+            InputControl();
+        }
+
+        void FixedUpdate() 
+        {
+            m_smoothedSteeringInput = Mathf.MoveTowards(m_smoothedSteeringInput, Input.GetAxis("Horizontal"), 
+                steeringAnimationDamping * Time.deltaTime);
+
+            // Steer front wheels
+            float rotationAngle = m_smoothedSteeringInput * maxSteeringAngle;
+
+            frontLeftWheel.steerAngle = rotationAngle;
+            frontRightWheel.steerAngle = rotationAngle;
+            
+            Move();
+        }
+        
+        void LateUpdate()
+        {
+            // Update position and rotation from WheelCollider
+            frontLeftWheel.UpdateWheelFromCollider();
+            frontRightWheel.UpdateWheelFromCollider();
+            rearLeftWheel.UpdateWheelFromCollider();
+            rearRightWheel.UpdateWheelFromCollider();
         }
     }
 }
