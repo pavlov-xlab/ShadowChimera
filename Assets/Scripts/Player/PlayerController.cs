@@ -16,6 +16,10 @@ namespace ShadowChimera
 
 		private CharMoveComponent m_charMoveController;
 
+		public event System.Action onUseItem;
+
+		public Character character => m_character;
+
 
 		private float m_cameraTargetYaw;
 		private float m_cameraTargetPitch;
@@ -29,6 +33,7 @@ namespace ShadowChimera
 		private InputAction m_switchWeaponAction;
 		private InputAction m_jumpAction;
 		private InputAction m_sprintAction;
+		private InputAction m_useAction;
 
 		private bool m_canLook = true;
 
@@ -42,8 +47,14 @@ namespace ShadowChimera
 			m_switchWeaponAction = m_playerMap.FindAction("SwitchWeapon");
 			m_jumpAction = m_playerMap.FindAction("Jump");
 			m_sprintAction = m_playerMap.FindAction("Sprint");
+			m_useAction = m_playerMap.FindAction("Use");
 
 			m_charMoveController = m_character.GetComponent<CharMoveComponent>();
+		}
+
+		public void SetActiveChar(bool active)
+		{
+			m_character.gameObject.SetActive(active);
 		}
 
 		private void OnEnable()
@@ -55,8 +66,14 @@ namespace ShadowChimera
 			m_reloadAction.performed += OnReloadPerformed;
 			m_switchWeaponAction.performed += OnSwitchWeaponPerformed;
 			m_jumpAction.performed += OnJumpPerformed;
+			m_useAction.performed += OnUsePerformed;
 
 			m_canLook = true;
+		}
+
+		private void OnUsePerformed(InputAction.CallbackContext context)
+		{
+			onUseItem?.Invoke();
 		}
 
 		private void OnJumpPerformed(InputAction.CallbackContext obj)
@@ -82,6 +99,8 @@ namespace ShadowChimera
 			m_fireAction.canceled -= OnFireInputCanceled;
 			m_reloadAction.performed -= OnReloadPerformed;
 			m_switchWeaponAction.performed -= OnSwitchWeaponPerformed;
+			m_jumpAction.performed -= OnJumpPerformed;
+			m_useAction.performed -= OnUsePerformed;
 		}
 
 		private void OnFireInputStarted(InputAction.CallbackContext context)

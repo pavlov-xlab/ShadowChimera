@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace ShadowChimera
 {
-    public class CarController : MonoBehaviour
+    public class CarPhysicController : MonoBehaviour
     {
         [Serializable] 
         public class Wheel
@@ -44,8 +44,10 @@ namespace ShadowChimera
             public void StoreDefaultRotation() => m_steerlessLocalRotation = wheelTransform.localRotation;
             public void SetToDefaultRotation() => wheelTransform.localRotation = m_steerlessLocalRotation;
         }
-        
-        
+
+
+        public Transform exitPoint;
+
         public Wheel frontLeftWheel;
         public Wheel frontRightWheel;
         public Wheel rearLeftWheel;
@@ -59,11 +61,15 @@ namespace ShadowChimera
         private float m_smoothedSteeringInput = 0f;
         private float m_currentAcceleration = 0.0f;
         private float m_currentBreakForce = 0.0f;
-        private int m_gear = 0;
+		private int m_gear = 0;
         private float m_lastBrakeValue = 0f;
         private Rigidbody m_rigidbody;
 
-        private void Awake()
+        private float m_inputAcces;
+		private float m_inputBrake;
+		private float m_inputSteering;
+
+		private void Awake()
         {
             m_rigidbody = GetComponent<Rigidbody>();
             
@@ -91,10 +97,9 @@ namespace ShadowChimera
         
         private void InputControl()
         {
-            var accel = Keyboard.current.upArrowKey.isPressed ? 1f : 0f;
-            var brake = Keyboard.current.downArrowKey.isPressed ? 1f : 0f;
-            // var accel = 0f;
-            // var brake = 0f;
+            var accel = m_inputAcces;
+            var brake = m_inputBrake;
+
             CheckAutoReverse(ref accel, ref brake, ref m_gear);
             
             m_currentAcceleration = m_gear == -1 ?  -accel : accel;
@@ -102,7 +107,9 @@ namespace ShadowChimera
             
             m_currentBreakForce = m_gear == -1 ?  -brake : brake;
             m_currentBreakForce *= brakingStats;
-        }
+
+			m_smoothedSteeringInput = Mathf.MoveTowards(m_smoothedSteeringInput, m_inputSteering, steeringAnimationDamping * Time.deltaTime);
+		}
         
         private void CheckAutoReverse(ref float acceleration, ref float brake, ref int gear)
         {
@@ -131,16 +138,17 @@ namespace ShadowChimera
             (acceleration, brake) = (brake, acceleration);
         }
 
-        private void Update()
+        public void SetInput(float acces, float brake, float steering) 
         {
-            InputControl();
-        }
+			m_inputAcces = acces;
+		    m_inputBrake = brake;
+		    m_inputSteering = steering;
+
+			InputControl();
+		}
 
         void FixedUpdate() 
         {
-            m_smoothedSteeringInput = Mathf.MoveTowards(m_smoothedSteeringInput, Input.GetAxis("Horizontal"), 
-                steeringAnimationDamping * Time.deltaTime);
-
             // Steer front wheels
             float rotationAngle = m_smoothedSteeringInput * maxSteeringAngle;
 
