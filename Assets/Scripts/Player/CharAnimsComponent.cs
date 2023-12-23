@@ -18,6 +18,8 @@ namespace ShadowChimera
 		private static int FreeFallId = Animator.StringToHash("FreeFall");
 
 		private IMoveComponent moveComponent => m_character.moveComponent;
+		
+		private float m_lastTimeGrounded = 0f;
 
 		private void Start()
 		{
@@ -60,11 +62,17 @@ namespace ShadowChimera
 				m_animator.SetBool(GroundedId, true);
 				m_animator.SetBool(FreeFallId, false);
 				m_animator.SetBool(JumpId, false);
+
+				m_lastTimeGrounded = Time.time;
 			}
 			else
 			{
 				m_animator.SetBool(GroundedId, false);
-				m_animator.SetBool(FreeFallId, true);
+
+				if (Time.time - m_lastTimeGrounded > 0.1f)
+				{
+					m_animator.SetBool(FreeFallId, true);
+				}
 			}
 		}
 	}
