@@ -24,30 +24,12 @@ namespace ShadowChimera
 		private float m_cameraTargetYaw;
 		private float m_cameraTargetPitch;
 
-		//Input
-		private InputActionMap m_playerMap;
-		private InputAction m_moveAction;
-		private InputAction m_lookAction;
-		private InputAction m_fireAction;
-		private InputAction m_reloadAction;
-		private InputAction m_switchWeaponAction;
-		private InputAction m_jumpAction;
-		private InputAction m_sprintAction;
-		private InputAction m_useAction;
-
 		private bool m_canLook = true;
+		private PlayerInput m_playerInput;
 
 		private void Awake()
 		{
-			m_playerMap = m_inputActionAsset.FindActionMap("Player");
-			m_moveAction = m_playerMap.FindAction("Move");
-			m_lookAction = m_playerMap.FindAction("Look");
-			m_fireAction = m_playerMap.FindAction("Fire");
-			m_reloadAction = m_playerMap.FindAction("Reload");
-			m_switchWeaponAction = m_playerMap.FindAction("SwitchWeapon");
-			m_jumpAction = m_playerMap.FindAction("Jump");
-			m_sprintAction = m_playerMap.FindAction("Sprint");
-			m_useAction = m_playerMap.FindAction("Use");
+			m_playerInput = new PlayerInput(m_inputActionAsset.FindActionMap("Player"));
 
 			m_charMoveController = m_character.GetComponent<CharMoveComponent>();
 		}
@@ -59,58 +41,13 @@ namespace ShadowChimera
 
 		private void OnEnable()
 		{
-			m_playerMap.Enable();
-
-			m_fireAction.started += OnFireInputStarted;
-			m_fireAction.canceled += OnFireInputCanceled;
-			m_reloadAction.performed += OnReloadPerformed;
-			m_switchWeaponAction.performed += OnSwitchWeaponPerformed;
-			m_jumpAction.performed += OnJumpPerformed;
-			m_useAction.performed += OnUsePerformed;
-
+			m_playerInput.Enable();
 			m_canLook = true;
 		}
-
-		private void OnUsePerformed(InputAction.CallbackContext context)
-		{
-			onUseItem?.Invoke();
-		}
-
-		private void OnJumpPerformed(InputAction.CallbackContext obj)
-		{
-			m_charMoveController.Jump();
-		}
-
-		private void OnSwitchWeaponPerformed(InputAction.CallbackContext context)
-		{
-			m_character.attackManager.Next();
-		}
-
-		private void OnReloadPerformed(InputAction.CallbackContext context)
-		{
-			m_character.attackManager.Reload();
-		}
-
+		
 		private void OnDisable()
 		{
-			m_playerMap.Disable();
-
-			m_fireAction.started -= OnFireInputStarted;
-			m_fireAction.canceled -= OnFireInputCanceled;
-			m_reloadAction.performed -= OnReloadPerformed;
-			m_switchWeaponAction.performed -= OnSwitchWeaponPerformed;
-			m_jumpAction.performed -= OnJumpPerformed;
-			m_useAction.performed -= OnUsePerformed;
-		}
-
-		private void OnFireInputStarted(InputAction.CallbackContext context)
-		{
-			m_character.attackManager.StartUse();
-		}
-
-		private void OnFireInputCanceled(InputAction.CallbackContext context)
-		{
-			m_character.attackManager.EndUse();
+			m_playerInput.Disable();
 		}
 
 		private void Update()
@@ -121,8 +58,37 @@ namespace ShadowChimera
 				return;
 			}
 
-			Vector2 move = m_moveAction.ReadValue<Vector2>();
-			Move(move, m_sprintAction.IsPressed());
+			Move(m_playerInput.move, m_playerInput.sprint);
+
+			if (m_playerInput.fireStarted)
+			{
+				m_character.attackManager.StartUse();
+			}
+
+			if (m_playerInput.fireCanceled)
+			{
+				m_character.attackManager.EndUse();
+			}
+
+			if (m_playerInput.reload)
+			{
+				m_character.attackManager.Reload();
+			}
+			
+			if (m_playerInput.switchWeapon)
+			{
+				m_character.attackManager.Next();
+			}
+			
+			if (m_playerInput.jump)
+			{
+				m_charMoveController.Jump();
+			}
+			
+			if (m_playerInput.use)
+			{
+				onUseItem?.Invoke();
+			}
 		}
 
 		private void LateUpdate()
@@ -137,7 +103,7 @@ namespace ShadowChimera
 				m_canLook = true;
 			}
 
-			var look = m_canLook ? m_lookAction.ReadValue<Vector2>() : Vector2.zero;
+			var look = m_canLook ? m_playerInput.look : Vector2.zero;
 			CameraRotation(look);
 		}
 
