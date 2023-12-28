@@ -7,11 +7,13 @@ namespace ShadowChimera
     {
 		[SerializeField] private AttackManager m_attackManager;
 		[SerializeField] private HealthComponent m_healthComponent;
+		[SerializeField] private AimComponent m_aimComponent;
 		private IMoveComponent m_moveComponent;
 
 		public AttackManager attackManager => m_attackManager;
 		public HealthComponent healthComponent => m_healthComponent;
 		public IMoveComponent moveComponent => m_moveComponent;
+		public AimComponent aimComponent => m_aimComponent;
 
 		public void Initialize(CharacterSO data)
 		{
@@ -42,8 +44,15 @@ namespace ShadowChimera
 			{
 				m_healthComponent = GetComponent<HealthComponent>();
 			}
+			
+			if (m_aimComponent == null)
+			{
+				m_aimComponent = GetComponent<AimComponent>();
+			}
 
 			m_moveComponent = GetComponent<IMoveComponent>();
+			
+			
 		}
 
 		private void OnEnable()

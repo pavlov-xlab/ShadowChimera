@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ShadowChimera
@@ -28,10 +29,8 @@ namespace ShadowChimera
 
 			if (m_character == null)
 			{
-				m_character = GetComponent<Character>();
+				m_character = GetComponentInParent<Character>();
 			}
-
-			m_character = GetComponentInParent<Character>();
 
 			m_character.healthComponent.onDie += () =>
 			{
@@ -76,5 +75,14 @@ namespace ShadowChimera
 			bool driving = m_character.transform.parent != null;
 			m_animator.SetBool(DrivingId, driving);
 		}
-	}
+
+		private void OnAnimatorIK(int layerIndex)
+		{
+			if (m_character.aimComponent)
+			{
+				m_animator.SetLookAtPosition(m_character.aimComponent.aimTargetPoint);
+				m_animator.SetLookAtWeight(1f, 0.3f, 0.75f);
+			}
+		}
+    }
 }
