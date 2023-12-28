@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 5750611943315084245}
   - component: {fileID: 7520153028797965944}
   m_Layer: 0
-  m_Name: CarVCamera
+  m_Name: CarCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,14 +120,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3548389415214649935}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08652801, y: -1e-45, z: 0, w: 0.99624944}
+  m_LocalRotation: {x: 0.08652983, y: 0, z: 0, w: 0.99624926}
   m_LocalPosition: {x: 0, y: 3.04, z: -8.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6527985870216649410}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.928, y: 0, z: 0}
 --- !u!114 &7520153028797965944
 MonoBehaviour:
   m_ObjectHideFlags: 0

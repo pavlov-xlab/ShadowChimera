@@ -28,6 +28,16 @@ namespace ShadowChimera
 		
 		public event Action onJump;
 
+		private void OnEnable()
+		{
+			m_characterController.enabled = true;
+		}
+
+		private void OnDisable()
+		{
+			m_characterController.enabled = false;
+		}
+
 		public void Init(float speed, float sprintSpeed)
 		{
 			m_moveSpeed = speed;

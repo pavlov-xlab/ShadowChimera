@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 namespace ShadowChimera
 {
@@ -16,6 +13,7 @@ namespace ShadowChimera
 		private static int JumpId = Animator.StringToHash("Jump");
 		private static int GroundedId = Animator.StringToHash("Grounded");
 		private static int FreeFallId = Animator.StringToHash("FreeFall");
+		private static int DrivingId = Animator.StringToHash("Driving");
 
 		private IMoveComponent moveComponent => m_character.moveComponent;
 		
@@ -35,7 +33,7 @@ namespace ShadowChimera
 
 			m_character = GetComponentInParent<Character>();
 
-			m_character.healtCompont.onDie += () =>
+			m_character.healthComponent.onDie += () =>
 			{
 				m_animator.SetTrigger(DieId);
 			};
@@ -74,6 +72,9 @@ namespace ShadowChimera
 					m_animator.SetBool(FreeFallId, true);
 				}
 			}
+
+			bool driving = m_character.transform.parent != null;
+			m_animator.SetBool(DrivingId, driving);
 		}
 	}
 }

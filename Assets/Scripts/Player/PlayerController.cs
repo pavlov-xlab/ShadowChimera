@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -15,8 +14,9 @@ namespace ShadowChimera
 		[SerializeField] private float m_bottomClamp = -9f;
 
 		private CharMoveComponent m_charMoveController;
+		private ItemDetector m_itemDetector;
 
-		public event System.Action onUseItem;
+		public event System.Action<GameObject> onUseItem;
 
 		public Character character => m_character;
 
@@ -30,8 +30,16 @@ namespace ShadowChimera
 		private void Awake()
 		{
 			m_playerInput = new PlayerInput(m_inputActionAsset.FindActionMap("Player"));
+			
+			SetCharacter(m_character);
+		}
 
+		public void SetCharacter(Character character)
+		{
+			m_character = character;
+			
 			m_charMoveController = m_character.GetComponent<CharMoveComponent>();
+			m_itemDetector = m_character.GetComponent<ItemDetector>();
 		}
 
 		public void SetActiveChar(bool active)
@@ -85,9 +93,9 @@ namespace ShadowChimera
 				m_charMoveController.Jump();
 			}
 			
-			if (m_playerInput.use)
+			if (m_playerInput.use && m_itemDetector.lastItem)
 			{
-				onUseItem?.Invoke();
+				onUseItem?.Invoke(m_itemDetector.lastItem);
 			}
 		}
 

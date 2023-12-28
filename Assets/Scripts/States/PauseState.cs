@@ -29,7 +29,7 @@ namespace ShadowChimera
 			SceneManager.LoadScene(scene.name);
 		}
 
-		public void Reume()
+		public void Resume()
 		{
 			States.instance.Pop();
 		}
