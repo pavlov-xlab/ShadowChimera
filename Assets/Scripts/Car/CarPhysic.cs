@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace ShadowChimera
 {
-    public class CarPhysicController : MonoBehaviour
+    public class CarPhysic : MonoBehaviour
     {
         [Serializable] 
         public class Wheel
@@ -47,6 +47,7 @@ namespace ShadowChimera
 
 
         public Transform exitPoint;
+        public Transform driverPoint;
 
         public Wheel frontLeftWheel;
         public Wheel frontRightWheel;
@@ -68,6 +69,9 @@ namespace ShadowChimera
         private float m_inputAcces;
 		private float m_inputBrake;
 		private float m_inputSteering;
+        private float m_inputHandbrake;
+
+        public float velocityMagnitude => m_rigidbody.velocity.magnitude;
 
 		private void Awake()
         {
@@ -77,6 +81,11 @@ namespace ShadowChimera
             frontRightWheel.Setup();
             rearLeftWheel.Setup();
             rearRightWheel.Setup();
+
+            if (driverPoint == null)
+            {
+                driverPoint = transform;
+            }
         }
 
         private void Move()
@@ -101,6 +110,11 @@ namespace ShadowChimera
             var brake = m_inputBrake;
 
             CheckAutoReverse(ref accel, ref brake, ref m_gear);
+
+            if (m_inputHandbrake > 0)
+            {
+                brake = Mathf.Max(m_inputHandbrake, brake);
+            }
             
             m_currentAcceleration = m_gear == -1 ?  -accel : accel;
             m_currentAcceleration *= accelerationStats;
@@ -138,14 +152,21 @@ namespace ShadowChimera
             (acceleration, brake) = (brake, acceleration);
         }
 
-        public void SetInput(float acces, float brake, float steering) 
+        public void SetInput(float acces, float brake, float steering, float handbrake) 
         {
 			m_inputAcces = acces;
 		    m_inputBrake = brake;
 		    m_inputSteering = steering;
+            m_inputHandbrake = handbrake;
 
 			InputControl();
 		}
+
+        public void ResetInput()
+        {
+            m_gear = 0;
+            SetInput(0, 0, 0, 1);
+        }
 
         void FixedUpdate() 
         {

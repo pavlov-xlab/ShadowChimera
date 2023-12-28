@@ -11,6 +11,8 @@ namespace ShadowChimera
         Vector3 velocity { get; }
         
         bool isGrounded { get; }
+        
+        bool enabled { set; get; }
 
         event System.Action onJump;
     }

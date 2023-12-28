@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 namespace ShadowChimera
 {
@@ -16,6 +14,7 @@ namespace ShadowChimera
 		private static int JumpId = Animator.StringToHash("Jump");
 		private static int GroundedId = Animator.StringToHash("Grounded");
 		private static int FreeFallId = Animator.StringToHash("FreeFall");
+		private static int DrivingId = Animator.StringToHash("Driving");
 
 		private IMoveComponent moveComponent => m_character.moveComponent;
 		
@@ -30,12 +29,10 @@ namespace ShadowChimera
 
 			if (m_character == null)
 			{
-				m_character = GetComponent<Character>();
+				m_character = GetComponentInParent<Character>();
 			}
 
-			m_character = GetComponentInParent<Character>();
-
-			m_character.healtCompont.onDie += () =>
+			m_character.healthComponent.onDie += () =>
 			{
 				m_animator.SetTrigger(DieId);
 			};
@@ -74,6 +71,18 @@ namespace ShadowChimera
 					m_animator.SetBool(FreeFallId, true);
 				}
 			}
+
+			bool driving = m_character.transform.parent != null;
+			m_animator.SetBool(DrivingId, driving);
 		}
-	}
+
+		private void OnAnimatorIK(int layerIndex)
+		{
+			if (m_character.aimComponent)
+			{
+				m_animator.SetLookAtPosition(m_character.aimComponent.aimTargetPoint);
+				m_animator.SetLookAtWeight(1f, 0.3f, 0.75f);
+			}
+		}
+    }
 }

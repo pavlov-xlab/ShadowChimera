@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace ShadowChimera
@@ -7,12 +6,14 @@ namespace ShadowChimera
     public class Character : MonoBehaviour
     {
 		[SerializeField] private AttackManager m_attackManager;
-		[SerializeField] private HealthComponent m_healtCompont;
+		[SerializeField] private HealthComponent m_healthComponent;
+		[SerializeField] private AimComponent m_aimComponent;
 		private IMoveComponent m_moveComponent;
 
 		public AttackManager attackManager => m_attackManager;
-		public HealthComponent healtCompont => m_healtCompont;
+		public HealthComponent healthComponent => m_healthComponent;
 		public IMoveComponent moveComponent => m_moveComponent;
+		public AimComponent aimComponent => m_aimComponent;
 
 		public void Initialize(CharacterSO data)
 		{
@@ -21,9 +22,9 @@ namespace ShadowChimera
 				attackManager.Initialize(data.weapons);
 			}
 
-			if (m_healtCompont)
+			if (m_healthComponent)
 			{
-				m_healtCompont.Initialize(data.healthData.maxHealth, data.healthData.health);
+				m_healthComponent.Initialize(data.healthData.maxHealth, data.healthData.health);
 			}
 
 			if (m_moveComponent != null)
@@ -39,12 +40,29 @@ namespace ShadowChimera
 				m_attackManager = GetComponent<AttackManager>();
 			}
 
-			if (m_healtCompont == null)
+			if (m_healthComponent == null)
 			{
-				m_healtCompont = GetComponent<HealthComponent>();
+				m_healthComponent = GetComponent<HealthComponent>();
+			}
+			
+			if (m_aimComponent == null)
+			{
+				m_aimComponent = GetComponent<AimComponent>();
 			}
 
 			m_moveComponent = GetComponent<IMoveComponent>();
+			
+			
+		}
+
+		private void OnEnable()
+		{
+			m_moveComponent.enabled = true;
+		}
+
+		private void OnDisable()
+		{
+			m_moveComponent.enabled = false;
 		}
 	}
 }

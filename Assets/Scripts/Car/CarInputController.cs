@@ -8,7 +8,7 @@ namespace ShadowChimera
 {
     public class CarInputController : MonoBehaviour
     {
-        [SerializeField] private CarPhysicController m_car;
+        [SerializeField] private CarPhysic m_car;
 		[SerializeField] private CinemachineVirtualCamera m_camera;
 		[SerializeField] private InputActionAsset m_inputActionAsset;
 
@@ -31,19 +31,24 @@ namespace ShadowChimera
 			m_carInput.Disable();
 		}
 
-		public void Init(CarPhysicController car)
+		public void SetCar(CarPhysic car)
         {
+	        if (m_car)
+	        {
+		        m_car.ResetInput();
+	        }
+	        
             m_car = car;
             
-            m_camera.Follow = car.transform;
-			m_camera.LookAt = car.transform;
+            m_camera.Follow = car ? car.transform : null;
+			m_camera.LookAt = car ? car.transform : null;
 		}
 
 		private void Start()
 		{
 			if (m_car != null)
 			{
-				Init(m_car);
+				SetCar(m_car);
 			}
 		}
 
@@ -51,7 +56,7 @@ namespace ShadowChimera
 		{
             if (m_car)
             {
-				m_car.SetInput(m_carInput.acces, m_carInput.brake, m_carInput.steering);
+				m_car.SetInput(m_carInput.acces, m_carInput.brake, m_carInput.steering, 0f);
 
 				if (m_carInput.exitPerformed)
 				{

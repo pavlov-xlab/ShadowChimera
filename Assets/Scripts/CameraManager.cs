@@ -7,9 +7,10 @@ namespace ShadowChimera
 {
     public static class CameraNames
     {
-        public const string Player = "PlayerController";
+        public const string Player = "PlayerCamera";
 		public const string Dead = "DeadCamera";
 		public const string Pause = "PauseCamera";
+		public const string Car = "CarCamera";
 	}
 
     public class CameraManager : MonoBehaviour
